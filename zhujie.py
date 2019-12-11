@@ -4,6 +4,8 @@ import tkinter.messagebox
 from sqlite_book import sql_book
 from sqlite_user import sql_user
 from admin import admin_system
+
+
 class system(object):
     def __init__(self):
         self.root = Tk()
@@ -53,23 +55,27 @@ class system(object):
     def in_system(self):
         user_name = self.user_Varname.get()
         user_password = self.user_varpassword.get()
-        User = sql_user()
-        result = User.QueryUser(user_name,self.var.get())
+        User = sql_user()   # ？？？
+        result = User.QueryUser(user_name, self.var.get())
         User.close()
         print(result)
         self.Type = self.var.get()
         if len(result) != 0:
-            if  self.Type is "A":
+            if self.Type is "A":
                 self.name = user_name
             else:
                 self.admin_name = result[0][4]
             if user_password == result[0][3]:
                 self.flag = False
                 self.root.destroy()
+
+
             else:
                 self.tip.config(text='密码错误' )
         else:
             self.tip.config(text='该用户名不存在')
+
+
 class main_():
     def __init__(self, master,user_,identity):
         self.root = master
